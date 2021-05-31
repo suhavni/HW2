@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 public class Counter {
 
     // A name for this type of simulation participant
-    private String name;
+    private final String NAME;
     // How many of this type exist in the simulation.
     private int count;
 
@@ -13,7 +13,7 @@ public class Counter {
      * @param name A name, e.g. "Fox".
      */
     public Counter(String name) {
-        this.name = name;
+        this.NAME = name;
         count = 0;
     }
 
@@ -21,7 +21,7 @@ public class Counter {
      * @return The short description of this type.
      */
     public String getName() {
-        return name;
+        return NAME;
     }
 
     /**

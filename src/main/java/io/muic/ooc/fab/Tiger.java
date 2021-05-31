@@ -27,17 +27,10 @@ public class Tiger extends Predator {
     }
 
     @Override
-    protected boolean eatPrey(Object animal) {
-        if (super.eatPrey(animal)) { return true; }
-        if (animal instanceof Fox) {
-            Fox fox = (Fox) animal;
-            if (fox.isAlive()) {
-                fox.setDead();
-                foodLevel = FOX_FOOD_VALUE;
-                return true;
-            }
-        }
-        return false;
+    protected int getFoodValue(Object animal) {
+        if (animal instanceof Rabbit) { return RABBIT_FOOD_VALUE; }
+        if (animal instanceof Fox) { return FOX_FOOD_VALUE; }
+        return 0;
     }
 
 

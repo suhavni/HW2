@@ -1,7 +1,6 @@
 package io.muic.ooc.fab;
 
 import java.util.List;
-import java.util.Random;
 
 public abstract class Predator extends Animal {
     // The food value of a single rabbit. In effect, this is the
@@ -45,12 +44,18 @@ public abstract class Predator extends Animal {
         }
     }
 
-    protected boolean eatPrey(Object animal) {
-        if (animal instanceof Rabbit) {
-            Rabbit rabbit = (Rabbit) animal;
-            if (rabbit.isAlive()) {
-                rabbit.setDead();
-                foodLevel = RABBIT_FOOD_VALUE;
+    protected int getFoodValue(Object animal) {
+        if (animal instanceof Rabbit) { return RABBIT_FOOD_VALUE; }
+        return 0;
+    }
+
+    private boolean eatPrey(Object animal) {
+        int foodValue = getFoodValue(animal);
+        if (foodValue != 0) {
+            Animal prey = (Animal) animal;
+            if (prey.isAlive()) {
+                prey.setDead();
+                foodLevel = foodValue;
                 return true;
             }
         }

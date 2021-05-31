@@ -17,11 +17,11 @@ public class Simulator {
     // Lists of animals in the field.
     private List<Actor> actors;
     // The current state of the field.
-    private Field field;
+    private final Field FIELD;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
-    private SimulatorView view;
+    private final SimulatorView VIEW;
     // Random generator
     private static final Random RANDOM = new Random();
 
@@ -47,14 +47,14 @@ public class Simulator {
         }
 
         actors = new ArrayList<>();
-        field = new Field(depth, width);
+        FIELD = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
-        view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.CYAN);
-        view.setColor(Tiger.class, Color.MAGENTA);
-        view.setColor(Hunter.class, Color.BLACK);
+        VIEW = new SimulatorView(depth, width);
+        VIEW.setColor(Rabbit.class, Color.ORANGE);
+        VIEW.setColor(Fox.class, Color.CYAN);
+        VIEW.setColor(Tiger.class, Color.MAGENTA);
+        VIEW.setColor(Hunter.class, Color.BLACK);
 
         // Setup a valid starting point.
         reset();
@@ -75,7 +75,7 @@ public class Simulator {
      * @param numSteps The number of steps to run for.
      */
     public void simulate(int numSteps) {
-        for (int step = 1; step <= numSteps && view.isViable(field); step++) {
+        for (int step = 1; step <= numSteps && VIEW.isViable(FIELD); step++) {
             simulateOneStep();
             // delay(60);   // uncomment this to run more slowly
         }
@@ -102,7 +102,7 @@ public class Simulator {
         // Add the newly born foxes and rabbits to the main lists.
         actors.addAll(newActors);
 
-        view.showStatus(step, field);
+        VIEW.showStatus(step, FIELD);
     }
 
     /**
@@ -111,13 +111,13 @@ public class Simulator {
     public void reset() {
         step = 0;
         actors.clear();
-        Location hunterLoc = new Location(RANDOM.nextInt(field.getDepth()), RANDOM.nextInt(field.getWidth()));
-        Actor hunter = ActorFactory.createActor(ActorType.HUNTER, false, field, hunterLoc);
+        Location hunterLoc = new Location(RANDOM.nextInt(FIELD.getDepth()), RANDOM.nextInt(FIELD.getWidth()));
+        Actor hunter = ActorFactory.createActor(ActorType.HUNTER, false, FIELD, hunterLoc);
         actors.add(hunter);
         populate();
 
         // Show the starting state in the view.
-        view.showStatus(step, field);
+        VIEW.showStatus(step, FIELD);
     }
 
     /**
@@ -125,14 +125,14 @@ public class Simulator {
      */
     private void populate() {
         
-        field.clear();
-        for (int row = 0; row < field.getDepth(); row++) {
-            for (int col = 0; col < field.getWidth(); col++) {
+        FIELD.clear();
+        for (int row = 0; row < FIELD.getDepth(); row++) {
+            for (int col = 0; col < FIELD.getWidth(); col++) {
                 for (ActorType actorType : ActorType.values()) {
                     if (actorType.equals(ActorType.HUNTER)) { continue; }
                     if (RANDOM.nextDouble() <= actorType.getCreationProbability()) {
                         Location location = new Location(row, col);
-                        Actor animal = ActorFactory.createActor(actorType, true, field, location);
+                        Actor animal = ActorFactory.createActor(actorType, true, FIELD, location);
                         actors.add(animal);
                         break;
                     }

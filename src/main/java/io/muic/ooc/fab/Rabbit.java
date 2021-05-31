@@ -1,7 +1,5 @@
 package io.muic.ooc.fab;
 
-import java.util.Random;
-
 public class Rabbit extends Animal {
     // Characteristics shared by all rabbits (class variables).
 
