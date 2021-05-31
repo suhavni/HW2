@@ -3,10 +3,7 @@ package io.muic.ooc.fab;
 
 import io.muic.ooc.fab.view.SimulatorView;
 
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.awt.Color;
 
 public class Simulator {
@@ -137,6 +134,7 @@ public class Simulator {
                         Location location = new Location(row, col);
                         Actor animal = ActorFactory.createActor(actorType, true, field, location);
                         actors.add(animal);
+                        break;
                     }
                 }
                 // else leave the location empty.

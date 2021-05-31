@@ -8,11 +8,11 @@ public class Tiger extends Predator {
     // The age to which a fox can live.
     private static final int MAX_AGE = 333;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.015;
+    private static final double BREEDING_PROBABILITY = 0.012;
 
     // The food value of a single fox. In effect, this is the
     // number of steps a tiger can go before it has to eat again.
-    protected static final int FOX_FOOD_VALUE = 13;
+    protected static final int FOX_FOOD_VALUE = 14;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero and not
