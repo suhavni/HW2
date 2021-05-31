@@ -6,8 +6,8 @@ public enum ActorType {
     TIGER(0.015),
     HUNTER(0);
 
-    private double creationProbability;
+    private final double CREATION_PROBABILITY;
 
-    ActorType(double creationProbability) { this.creationProbability = creationProbability; }
-    public double getCreationProbability() { return creationProbability; }
+    ActorType(double creationProbability) { this.CREATION_PROBABILITY = creationProbability; }
+    public double getCreationProbability() { return CREATION_PROBABILITY; }
 }

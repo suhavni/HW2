@@ -5,15 +5,13 @@ import java.util.Random;
 
 public abstract class Predator extends Animal {
     // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
+    // number of steps a predator can go before it has to eat again.
     protected static final int RABBIT_FOOD_VALUE = 9;
-    // Random generator
-    private static final Random RANDOM = new Random();
 
     // The maximum number of births.
     protected static final int MAX_LITTER_SIZE = 2;
 
-    // The fox's food level, which is increased by eating rabbits.
+    // The predator's food level, which is increased by eating preys.
     protected int foodLevel;
 
     public Predator(boolean randomAge, Field field, Location location) {
@@ -38,7 +36,7 @@ public abstract class Predator extends Animal {
     }
 
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Make this predator more hungry. This could result in the predator's death.
      */
     private void incrementHunger() {
         foodLevel--;

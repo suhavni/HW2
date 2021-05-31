@@ -1,14 +1,11 @@
 package io.muic.ooc.fab;
 
 import java.util.List;
-import java.util.Random;
 
 public abstract class Animal extends Actor {
     // Individual characteristics (instance fields).
-    // The fox's age.
+    // The animal's age.
     protected int age;
-
-    private static final Random RANDOM = new Random();
 
     public Animal(boolean randomAge, Field field, Location location) {
         age = 0;
@@ -23,7 +20,7 @@ public abstract class Animal extends Actor {
     public abstract int getMaxAge();
 
     /**
-     * Increase the age. This could result in the rabbit's death.
+     * Increase the age. This could result in the animal's death.
      */
     protected void incrementAge() {
         age++;
@@ -34,7 +31,7 @@ public abstract class Animal extends Actor {
 
 
     /**
-     * Indicate that the fox is no longer alive. It is removed from the field.
+     * Indicate that the animal is no longer alive. It is removed from the field.
      */
     protected void setDead() {
         setAlive(false);
@@ -49,7 +46,6 @@ public abstract class Animal extends Actor {
         incrementAge();
         if (isAlive()) {
             giveBirth(animals);
-            // Move towards a source of food if found.
             Location newLocation = generateNewLocation();
             // See if it was possible to move.
             if (newLocation != null) {
@@ -78,9 +74,9 @@ public abstract class Animal extends Actor {
     protected abstract int getMaxLitterSize();
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
+     * An animal can breed if it has reached the breeding age.
      *
-     * @return true if the rabbit can breed, false otherwise.
+     * @return true if the animal can breed, false otherwise.
      */
     private boolean canBreed() {
         return age >= getBreedingAge();
@@ -88,13 +84,13 @@ public abstract class Animal extends Actor {
 
     protected abstract int getBreedingAge();
 
-    protected abstract Animal createYoung(boolean randomAge, Field field, Location location);
+    protected abstract Animal createYoung(Field field, Location location);
 
     /**
-     * Check whether or not this rabbit is to give birth at this step. New
+     * Check whether or not this animal is to give birth at this step. New
      * births will be made into free adjacent locations.
      *
-     * @param newAnimals A list to return newly born rabbits.
+     * @param newAnimals A list to return newly born animals.
      */
     protected void giveBirth(List<Actor> newAnimals) {
         // New animals are born into adjacent locations.
@@ -103,7 +99,7 @@ public abstract class Animal extends Actor {
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Animal young = createYoung(false, field, loc);
+            Animal young = createYoung(field, loc);
             newAnimals.add(young);
         }
     }

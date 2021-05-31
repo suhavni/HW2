@@ -1,6 +1,5 @@
 package io.muic.ooc.fab;
 
-import java.util.List;
 import java.util.Random;
 
 public class Rabbit extends Animal {
@@ -14,8 +13,6 @@ public class Rabbit extends Animal {
     private static final double BREEDING_PROBABILITY = 0.12;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 4;
-    // A shared random number generator to control breeding.
-    private static final Random RANDOM = new Random();
 
     /**
      * Create a new rabbit. A rabbit may be created with age zero (a new born)
@@ -55,7 +52,7 @@ public class Rabbit extends Animal {
     }
 
     @Override
-    protected Animal createYoung(boolean randomAge, Field field, Location location) {
-        return new Rabbit(randomAge, field, location);
+    protected Animal createYoung(Field field, Location location) {
+        return new Rabbit(false, field, location);
     }
 }

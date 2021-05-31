@@ -17,8 +17,6 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
 
-//    private Map<ActorType, Double> creationProbabilityMap
-
     // Lists of animals in the field.
     private List<Actor> actors;
     // The current state of the field.
@@ -53,8 +51,6 @@ public class Simulator {
 
         actors = new ArrayList<>();
         field = new Field(depth, width);
-//        Location location = new Location(RANDOM.nextInt(field.getDepth()), RANDOM.nextInt(field.getWidth()));
-//        Actor hunter = ActorFactory.createActor(ActorType.HUNTER, true, field, location);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);

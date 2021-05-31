@@ -1,8 +1,5 @@
 package io.muic.ooc.fab;
 
-import java.util.List;
-import java.util.Random;
-
 public class Fox extends Predator {
     // Characteristics shared by all foxes (class variables).
 
@@ -46,7 +43,7 @@ public class Fox extends Predator {
     }
 
     @Override
-    protected Animal createYoung(boolean randomAge, Field field, Location location) {
-        return new Fox(randomAge, field, location);
+    protected Animal createYoung(Field field, Location location) {
+        return new Fox(false, field, location);
     }
 }

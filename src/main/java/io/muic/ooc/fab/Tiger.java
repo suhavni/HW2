@@ -62,7 +62,7 @@ public class Tiger extends Predator {
     }
 
     @Override
-    protected Animal createYoung(boolean randomAge, Field field, Location location) {
-        return new Tiger(randomAge, field, location);
+    protected Animal createYoung(Field field, Location location) {
+        return new Tiger(false, field, location);
     }
 }

@@ -48,44 +48,44 @@ public class Field {
     }
 
     /**
-     * Place an animal at the given location. If there is already an animal at
+     * Place an actor at the given location. If there is already an actor at
      * the location it will be lost.
      *
-     * @param animal The animal to be placed.
+     * @param actor The actor to be placed.
      * @param row Row coordinate of the location.
      * @param col Column coordinate of the location.
      */
-    public void place(Object animal, int row, int col) {
-        place(animal, new Location(row, col));
+    public void place(Object actor, int row, int col) {
+        place(actor, new Location(row, col));
     }
 
     /**
-     * Place an animal at the given location. If there is already an animal at
+     * Place an actor at the given location. If there is already an actor at
      * the location it will be lost.
      *
-     * @param animal The animal to be placed.
-     * @param location Where to place the animal.
+     * @param actor The actor to be placed.
+     * @param location Where to place the actor.
      */
-    public void place(Object animal, Location location) {
-        field[location.getRow()][location.getCol()] = animal;
+    public void place(Object actor, Location location) {
+        field[location.getRow()][location.getCol()] = actor;
     }
 
     /**
-     * Return the animal at the given location, if any.
+     * Return the actor at the given location, if any.
      *
      * @param location Where in the field.
-     * @return The animal at the given location, or null if there is none.
+     * @return The actor at the given location, or null if there is none.
      */
     public Object getObjectAt(Location location) {
         return getObjectAt(location.getRow(), location.getCol());
     }
 
     /**
-     * Return the animal at the given location, if any.
+     * Return the actor at the given location, if any.
      *
      * @param row The desired row.
      * @param col The desired column.
-     * @return The animal at the given location, or null if there is none.
+     * @return The actor at the given location, or null if there is none.
      */
     public Object getObjectAt(int row, int col) {
         return field[row][col];

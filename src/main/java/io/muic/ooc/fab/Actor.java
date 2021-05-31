@@ -1,22 +1,25 @@
 package io.muic.ooc.fab;
 
 import java.util.List;
+import java.util.Random;
 
 public abstract class Actor {
-    // Whether the animal is alive or not.
+    // Whether the actor is alive or not.
     protected boolean alive;
 
-    // The fox's position.
+    // The actor's position.
     protected Location location;
     // The field occupied.
     protected Field field;
 
     protected abstract Location generateNewLocation();
 
+    protected static final Random RANDOM = new Random();
+
     /**
-     * Check whether the animal is alive or not.
+     * Check whether the actor is alive or not.
      *
-     * @return true if the animal is still alive.
+     * @return true if the actor is still alive.
      */
     public boolean isAlive() {
         return alive;
@@ -28,18 +31,18 @@ public abstract class Actor {
     }
 
     /**
-     * Return the fox's location.
+     * Return the actor's location.
      *
-     * @return The fox's location.
+     * @return The actor's location.
      */
     public Location getLocation() {
         return location;
     }
 
     /**
-     * Place the rabbit at the new location in the given field.
+     * Place the actor at the new location in the given field.
      *
-     * @param newLocation The rabbit's new location.
+     * @param newLocation The actor's new location.
      */
     protected void setLocation(Location newLocation) {
         if (location != null) {

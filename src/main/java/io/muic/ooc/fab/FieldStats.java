@@ -26,18 +26,18 @@ public class FieldStats {
      * @return A string describing what is in the field.
      */
     public String getPopulationDetails(Field field) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         if (!countsValid) {
             generateCounts(field);
         }
         for (Class key : counters.keySet()) {
             Counter info = counters.get(key);
-            buffer.append(info.getName());
-            buffer.append(": ");
-            buffer.append(info.getCount());
-            buffer.append(' ');
+            stringBuilder.append(info.getName());
+            stringBuilder.append(": ");
+            stringBuilder.append(info.getCount());
+            stringBuilder.append(' ');
         }
-        return buffer.toString();
+        return stringBuilder.toString();
     }
 
     /**
@@ -45,7 +45,7 @@ public class FieldStats {
      */
     public void reset() {
         countsValid = false;
-        for (Class key : counters.keySet()) {
+        for (var key : counters.keySet()) {
             Counter count = counters.get(key);
             count.reset();
         }
@@ -86,7 +86,7 @@ public class FieldStats {
         if (!countsValid) {
             generateCounts(field);
         }
-        for (Class key : counters.keySet()) {
+        for (var key : counters.keySet()) {
             Counter info = counters.get(key);
             if (info.getCount() > 0) {
                 nonZero++;
