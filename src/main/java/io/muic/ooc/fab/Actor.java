@@ -31,15 +31,6 @@ public abstract class Actor {
     }
 
     /**
-     * Return the actor's location.
-     *
-     * @return The actor's location.
-     */
-    public Location getLocation() {
-        return location;
-    }
-
-    /**
      * Place the actor at the new location in the given field.
      *
      * @param newLocation The actor's new location.

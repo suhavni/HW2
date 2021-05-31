@@ -28,7 +28,7 @@ public class Rabbit extends Animal {
 
     @Override
     protected Location generateNewLocation() {
-        return field.freeAdjacentLocation(getLocation());
+        return field.freeAdjacentLocation(location);
     }
 
     @Override

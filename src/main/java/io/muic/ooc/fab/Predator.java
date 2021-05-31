@@ -24,7 +24,7 @@ public abstract class Predator extends Animal {
         Location newLocation = findFood();
         if (newLocation == null) {
             // No food found - try to move to a free location.
-            newLocation = field.freeAdjacentLocation(getLocation());
+            newLocation = field.freeAdjacentLocation(location);
         }
         return newLocation;
     }

@@ -15,7 +15,7 @@ public class Hunter extends Actor {
         Location newLocation = huntAnimal();
         if (newLocation == null) {
             // No animal found - try to move to a free location.
-            newLocation = field.freeAdjacentLocation(getLocation());
+            newLocation = field.freeAdjacentLocation(location);
         }
         return newLocation;
     }
