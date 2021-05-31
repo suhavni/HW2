@@ -7,7 +7,7 @@ public class ActorFactory {
             case RABBIT: return new Rabbit(randomAge, field, location);
             case TIGER: return new Tiger(randomAge, field, location);
             case HUNTER: return new Hunter(field, location);
-            default: throw new IllegalArgumentException("idk");
+            default: throw new IllegalArgumentException("INVALID ACTOR TYPE");
         }
     }
 }
