@@ -16,13 +16,11 @@ public class Simulator {
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+
+//    private Map<ActorType, Double> creationProbabilityMap
 
     // Lists of animals in the field.
-    private List<Animal> animals;
+    private List<Actor> actors;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -53,13 +51,17 @@ public class Simulator {
             width = DEFAULT_WIDTH;
         }
 
-        animals = new ArrayList<>();
+        actors = new ArrayList<>();
         field = new Field(depth, width);
+//        Location location = new Location(RANDOM.nextInt(field.getDepth()), RANDOM.nextInt(field.getWidth()));
+//        Actor hunter = ActorFactory.createActor(ActorType.HUNTER, true, field, location);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Fox.class, Color.CYAN);
+        view.setColor(Tiger.class, Color.MAGENTA);
+        view.setColor(Hunter.class, Color.BLACK);
 
         // Setup a valid starting point.
         reset();
@@ -94,18 +96,18 @@ public class Simulator {
         step++;
 
         // Provide space for newborn rabbits.
-        List<Animal> newAnimals = new ArrayList<>();
+        List<Actor> newActors = new ArrayList<>();
         // Let all rabbits act.
-        for (Iterator<Animal> it = animals.iterator(); it.hasNext();) {
-            Animal animal = it.next();
-            animal.nextStep(newAnimals);
-            if (!animal.isAlive()) {
+        for (Iterator<Actor> it = actors.iterator(); it.hasNext();) {
+            Actor actor = it.next();
+            actor.nextStep(newActors);
+            if (!actor.isAlive()) {
                 it.remove();
             }
         }
 
         // Add the newly born foxes and rabbits to the main lists.
-        animals.addAll(newAnimals);
+        actors.addAll(newActors);
 
         view.showStatus(step, field);
     }
@@ -115,7 +117,10 @@ public class Simulator {
      */
     public void reset() {
         step = 0;
-        animals.clear();
+        actors.clear();
+        Location hunterLoc = new Location(RANDOM.nextInt(field.getDepth()), RANDOM.nextInt(field.getWidth()));
+        Actor hunter = ActorFactory.createActor(ActorType.HUNTER, false, field, hunterLoc);
+        actors.add(hunter);
         populate();
 
         // Show the starting state in the view.
@@ -130,14 +135,13 @@ public class Simulator {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                if (RANDOM.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
-                } else if (RANDOM.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                for (ActorType actorType : ActorType.values()) {
+                    if (actorType.equals(ActorType.HUNTER)) { continue; }
+                    if (RANDOM.nextDouble() <= actorType.getCreationProbability()) {
+                        Location location = new Location(row, col);
+                        Actor animal = ActorFactory.createActor(actorType, true, field, location);
+                        actors.add(animal);
+                    }
                 }
                 // else leave the location empty.
             }

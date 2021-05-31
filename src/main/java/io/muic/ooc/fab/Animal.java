@@ -3,14 +3,7 @@ package io.muic.ooc.fab;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal {
-    // Whether the animal is alive or not.
-    private boolean alive;
-
-    // The fox's position.
-    protected Location location;
-    // The field occupied.
-    protected Field field;
+public abstract class Animal extends Actor {
     // Individual characteristics (instance fields).
     // The fox's age.
     protected int age;
@@ -25,29 +18,6 @@ public abstract class Animal {
         if (randomAge) {
             age = RANDOM.nextInt(getMaxAge());
         }
-    }
-
-
-    /**
-     * Check whether the animal is alive or not.
-     *
-     * @return true if the animal is still alive.
-     */
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
-    /**
-     * Return the fox's location.
-     *
-     * @return The fox's location.
-     */
-    public Location getLocation() {
-        return location;
     }
 
     public abstract int getMaxAge();
@@ -75,25 +45,10 @@ public abstract class Animal {
         }
     }
 
-    /**
-     * Place the rabbit at the new location in the given field.
-     *
-     * @param newLocation The rabbit's new location.
-     */
-    protected void setLocation(Location newLocation) {
-        if (location != null) {
-            field.clear(location);
-        }
-        location = newLocation;
-        field.place(this, newLocation);
-    }
-
-    protected abstract Location generateNewLocation();
-
-    protected void nextStep(List<Animal> newFoxes) {
+    protected void nextStep(List<Actor> animals) {
         incrementAge();
         if (isAlive()) {
-            giveBirth(newFoxes);
+            giveBirth(animals);
             // Move towards a source of food if found.
             Location newLocation = generateNewLocation();
             // See if it was possible to move.
@@ -141,7 +96,7 @@ public abstract class Animal {
      *
      * @param newAnimals A list to return newly born rabbits.
      */
-    protected void giveBirth(List<Animal> newAnimals) {
+    protected void giveBirth(List<Actor> newAnimals) {
         // New animals are born into adjacent locations.
         // Get a list of adjacent free locations.
         List<Location> free = field.getFreeAdjacentLocations(location);
