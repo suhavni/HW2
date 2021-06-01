@@ -118,7 +118,7 @@ public class Simulator extends Observable {
         populate();
 
         // Show the starting state in the view.
-        view.showStatus(step, field);
+        notifyObservers(step, field);
     }
 
     /**
