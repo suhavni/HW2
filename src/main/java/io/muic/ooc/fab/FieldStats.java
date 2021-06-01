@@ -6,7 +6,7 @@ import java.util.Map;
 public class FieldStats {
 
     // Counters for each type of entity (fox, rabbit, etc.) in the simulation.
-    private final Map<Class, Counter> counters;
+    private final Map<Class<?>, Counter> counters;
     // Whether the counters are currently up to date.
     private boolean countsValid;
 
@@ -23,7 +23,6 @@ public class FieldStats {
     /**
      * Get details of what is in the field.
      *
-     * @param field
      * @return A string describing what is in the field.
      */
     public String getPopulationDetails(Field field) {
@@ -31,7 +30,7 @@ public class FieldStats {
         if (!countsValid) {
             generateCounts(field);
         }
-        for (Class key : counters.keySet()) {
+        for (Class<?> key : counters.keySet()) {
             Counter info = counters.get(key);
             stringBuilder.append(info.getName());
             stringBuilder.append(": ");
@@ -57,7 +56,7 @@ public class FieldStats {
      *
      * @param animalClass The class of animal to increment.
      */
-    public void incrementCount(Class animalClass) {
+    public void incrementCount(Class<?> animalClass) {
         Counter count = counters.get(animalClass);
         if (count == null) {
             // We do not have a counter for this species yet.
