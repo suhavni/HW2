@@ -21,14 +21,14 @@ public class SimulatorView extends JFrame {
 
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private final JLabel stepLabel;
-    private final JLabel population;
-    private final FieldView fieldView;
+    private JLabel stepLabel;
+    private JLabel population;
+    private FieldView fieldView;
 
     // A map for storing colors for participants in the simulation
-    private final Map<Class, Color> colors;
+    private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
-    private final FieldStats stats;
+    private FieldStats stats;
 
     /**
      * Create a view of the given width and height.
