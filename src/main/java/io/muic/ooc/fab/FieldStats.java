@@ -1,11 +1,12 @@
 package io.muic.ooc.fab;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class FieldStats {
 
     // Counters for each type of entity (fox, rabbit, etc.) in the simulation.
-    private final HashMap<Class, Counter> counters;
+    private final Map<Class, Counter> counters;
     // Whether the counters are currently up to date.
     private boolean countsValid;
 

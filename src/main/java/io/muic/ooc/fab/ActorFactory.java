@@ -1,18 +1,20 @@
 package io.muic.ooc.fab;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class ActorFactory {
     public static Actor createActor(ActorType actorType, boolean randomAge, Field field, Location location) {
-        switch (actorType) {
-            case FOX:
-                return new Fox(randomAge, field, location);
-            case RABBIT:
-                return new Rabbit(randomAge, field, location);
-            case TIGER:
-                return new Tiger(randomAge, field, location);
-            case HUNTER:
-                return new Hunter(field, location);
-            default:
-                throw new IllegalArgumentException("INVALID ACTOR TYPE");
-        }
+            try {
+                return actorType.getActorClass().getConstructor(boolean.class, Field.class, Location.class).newInstance(randomAge, field, location);
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            return null;
     }
 }

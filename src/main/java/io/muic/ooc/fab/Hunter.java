@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 import java.util.List;
 
 public class Hunter extends Actor {
-    public Hunter(Field field, Location location) {
+    public Hunter(boolean randomAge, Field field, Location location) {
         setAlive(true);
         this.field = field;
         setLocation(location);
