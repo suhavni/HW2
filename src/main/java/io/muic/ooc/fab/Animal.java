@@ -8,10 +8,8 @@ public abstract class Animal extends Actor {
     protected int age;
 
     public Animal(boolean randomAge, Field field, Location location) {
+        super(randomAge, field, location);
         age = 0;
-        setAlive(true);
-        this.field = field;
-        setLocation(location);
         if (randomAge) {
             age = RANDOM.nextInt(getMaxAge());
         }

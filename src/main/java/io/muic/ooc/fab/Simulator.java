@@ -60,7 +60,6 @@ public class Simulator extends Observable {
         view.setColor(Hunter.class, Color.BLACK);
         addObserver(new SimulatorObserver(view));
 
-
         // Setup a valid starting point.
         reset();
     }

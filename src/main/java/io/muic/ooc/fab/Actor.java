@@ -14,6 +14,12 @@ public abstract class Actor {
 
     protected abstract Location generateNewLocation();
 
+    public Actor(boolean randomAge, Field field, Location location) {
+        setAlive(true);
+        this.field = field;
+        setLocation(location);
+    }
+
     /**
      * Check whether the actor is alive or not.
      *

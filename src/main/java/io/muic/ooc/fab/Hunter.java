@@ -4,9 +4,7 @@ import java.util.List;
 
 public class Hunter extends Actor {
     public Hunter(boolean randomAge, Field field, Location location) {
-        setAlive(true);
-        this.field = field;
-        setLocation(location);
+        super(randomAge, field, location);
     }
 
 
