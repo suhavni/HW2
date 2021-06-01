@@ -132,7 +132,7 @@ public class Simulator extends Observable {
                 for (ActorType actorType : ActorType.values()) {
                     if (RANDOM.nextDouble() <= actorType.getCreationProbability()) {
                         Location location = new Location(row, col);
-                        Actor animal = ActorFactory.createActor(actorType, true, field, location);
+                        Actor animal = ActorFactory.createActor(actorType, field, location);
                         actors.add(animal);
                         break;
                     }
