@@ -4,17 +4,15 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class Actor {
+    protected static final Random RANDOM = new Random();
     // Whether the actor is alive or not.
     protected boolean alive;
-
     // The actor's position.
     protected Location location;
     // The field occupied.
     protected Field field;
 
     protected abstract Location generateNewLocation();
-
-    protected static final Random RANDOM = new Random();
 
     /**
      * Check whether the actor is alive or not.

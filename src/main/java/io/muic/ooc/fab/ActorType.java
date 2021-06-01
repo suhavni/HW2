@@ -8,6 +8,11 @@ public enum ActorType {
 
     private final double CREATION_PROBABILITY;
 
-    ActorType(double creationProbability) { this.CREATION_PROBABILITY = creationProbability; }
-    public double getCreationProbability() { return CREATION_PROBABILITY; }
+    ActorType(double creationProbability) {
+        this.CREATION_PROBABILITY = creationProbability;
+    }
+
+    public double getCreationProbability() {
+        return CREATION_PROBABILITY;
+    }
 }

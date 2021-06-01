@@ -71,7 +71,10 @@ public abstract class Animal extends Actor {
     }
 
     protected abstract double getBreedingProbability();
+
     protected abstract int getMaxLitterSize();
+
+    protected abstract int getFoodValue();
 
     /**
      * An animal can breed if it has reached the breeding age.

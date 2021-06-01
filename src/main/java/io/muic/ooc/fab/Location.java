@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 public class Location {
 
     // Row and column positions.
-    private final int ROW;
+    private final int row;
     private final int COL;
 
     /**
@@ -13,7 +13,7 @@ public class Location {
      * @param col The column.
      */
     public Location(int row, int col) {
-        this.ROW = row;
+        this.row = row;
         this.COL = col;
     }
 
@@ -23,7 +23,7 @@ public class Location {
     public boolean equals(Object obj) {
         if (obj instanceof Location) {
             Location other = (Location) obj;
-            return ROW == other.getRow() && COL == other.getCol();
+            return row == other.getRow() && COL == other.getCol();
         } else {
             return false;
         }
@@ -35,7 +35,7 @@ public class Location {
      * @return A string representation of the location.
      */
     public String toString() {
-        return ROW + "," + COL;
+        return row + "," + COL;
     }
 
     /**
@@ -46,14 +46,14 @@ public class Location {
      * @return A hashcode for the location.
      */
     public int hashCode() {
-        return (ROW << 16) + COL;
+        return (row << 16) + COL;
     }
 
     /**
      * @return The row.
      */
     public int getRow() {
-        return ROW;
+        return row;
     }
 
     /**

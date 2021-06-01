@@ -3,6 +3,9 @@ package io.muic.ooc.fab;
 public class Rabbit extends Animal {
     // Characteristics shared by all rabbits (class variables).
 
+    // The food value of a single rabbit. In effect, this is the
+    // number of steps a predator can go before it has to eat again.
+    protected static final int FOOD_VALUE = 9;
     // The age at which a rabbit can start to breed.
     private static final int BREEDING_AGE = 5;
     // The age to which a rabbit can live.
@@ -17,8 +20,8 @@ public class Rabbit extends Animal {
      * or with a random age.
      *
      * @param randomAge If true, the rabbit will have a random age.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
+     * @param field     The field currently occupied.
+     * @param location  The location within the field.
      */
     public Rabbit(boolean randomAge, Field field, Location location) {
         super(randomAge, field, location);
@@ -52,5 +55,10 @@ public class Rabbit extends Animal {
     @Override
     protected Animal createYoung(Field field, Location location) {
         return new Rabbit(false, field, location);
+    }
+
+    @Override
+    protected int getFoodValue() {
+        return FOOD_VALUE;
     }
 }

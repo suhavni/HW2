@@ -3,9 +3,6 @@ package io.muic.ooc.fab;
 import java.util.List;
 
 public abstract class Predator extends Animal {
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a predator can go before it has to eat again.
-    protected static final int RABBIT_FOOD_VALUE = 9;
 
     // The maximum number of births.
     protected static final int MAX_LITTER_SIZE = 2;
@@ -15,7 +12,7 @@ public abstract class Predator extends Animal {
 
     public Predator(boolean randomAge, Field field, Location location) {
         super(randomAge, field, location);
-        foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE);
+        foodLevel = RANDOM.nextInt(9);
     }
 
     @Override
@@ -45,7 +42,9 @@ public abstract class Predator extends Animal {
     }
 
     protected int getFoodValue(Object animal) {
-        if (animal instanceof Rabbit) { return RABBIT_FOOD_VALUE; }
+        if (animal instanceof Rabbit) {
+            return ((Rabbit) animal).getFoodValue();
+        }
         return 0;
     }
 
@@ -66,7 +65,9 @@ public abstract class Predator extends Animal {
         List<Location> adjacent = field.adjacentLocations(location);
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
-            if (eatPrey(animal)) { return where; }
+            if (eatPrey(animal)) {
+                return where;
+            }
         }
         return null;
     }

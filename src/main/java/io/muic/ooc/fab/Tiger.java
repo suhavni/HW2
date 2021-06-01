@@ -10,17 +10,15 @@ public class Tiger extends Predator {
     // The likelihood of a fox breeding.
     private static final double BREEDING_PROBABILITY = 0.012;
 
-    // The food value of a single fox. In effect, this is the
-    // number of steps a tiger can go before it has to eat again.
-    protected static final int FOX_FOOD_VALUE = 14;
+    private static final int FOOD_VALUE = 21;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero and not
      * hungry) or with a random age and food level.
      *
      * @param randomAge If true, the fox will have random age and hunger level.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
+     * @param field     The field currently occupied.
+     * @param location  The location within the field.
      */
     public Tiger(boolean randomAge, Field field, Location location) {
         super(randomAge, field, location);
@@ -28,8 +26,9 @@ public class Tiger extends Predator {
 
     @Override
     protected int getFoodValue(Object animal) {
-        if (animal instanceof Rabbit) { return RABBIT_FOOD_VALUE; }
-        if (animal instanceof Fox) { return FOX_FOOD_VALUE; }
+        if (animal instanceof Rabbit || animal instanceof Fox) {
+            return ((Animal) animal).getFoodValue();
+        }
         return 0;
     }
 
@@ -57,5 +56,10 @@ public class Tiger extends Predator {
     @Override
     protected Animal createYoung(Field field, Location location) {
         return new Tiger(false, field, location);
+    }
+
+    @Override
+    protected int getFoodValue() {
+        return FOOD_VALUE;
     }
 }

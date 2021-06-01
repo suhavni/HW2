@@ -1,29 +1,32 @@
 package io.muic.ooc.fab;
 
-
+import io.muic.ooc.fab.observer.Observable;
+import io.muic.ooc.fab.observer.SimulatorObserver;
 import io.muic.ooc.fab.view.SimulatorView;
 
-import java.util.*;
-import java.awt.Color;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
-public class Simulator {
+public class Simulator extends Observable {
 
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-
+    // Random generator
+    private static final Random RANDOM = new Random();
     // Lists of animals in the field.
-    private List<Actor> actors;
+    private final List<Actor> actors;
     // The current state of the field.
-    private final Field FIELD;
+    private final Field field;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
-    private final SimulatorView VIEW;
-    // Random generator
-    private static final Random RANDOM = new Random();
+    private final SimulatorView view;
 
     /**
      * Construct a simulation field with default size.
@@ -47,14 +50,16 @@ public class Simulator {
         }
 
         actors = new ArrayList<>();
-        FIELD = new Field(depth, width);
+        field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
-        VIEW = new SimulatorView(depth, width);
-        VIEW.setColor(Rabbit.class, Color.ORANGE);
-        VIEW.setColor(Fox.class, Color.CYAN);
-        VIEW.setColor(Tiger.class, Color.MAGENTA);
-        VIEW.setColor(Hunter.class, Color.BLACK);
+        view = new SimulatorView(depth, width);
+        view.setColor(Rabbit.class, Color.ORANGE);
+        view.setColor(Fox.class, Color.CYAN);
+        view.setColor(Tiger.class, Color.MAGENTA);
+        view.setColor(Hunter.class, Color.BLACK);
+        addObserver(new SimulatorObserver(view));
+
 
         // Setup a valid starting point.
         reset();
@@ -75,7 +80,7 @@ public class Simulator {
      * @param numSteps The number of steps to run for.
      */
     public void simulate(int numSteps) {
-        for (int step = 1; step <= numSteps && VIEW.isViable(FIELD); step++) {
+        for (int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
             // delay(60);   // uncomment this to run more slowly
         }
@@ -91,7 +96,7 @@ public class Simulator {
         // Provide space for newborn rabbits.
         List<Actor> newActors = new ArrayList<>();
         // Let all rabbits act.
-        for (Iterator<Actor> it = actors.iterator(); it.hasNext();) {
+        for (Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
             actor.nextStep(newActors);
             if (!actor.isAlive()) {
@@ -102,7 +107,7 @@ public class Simulator {
         // Add the newly born foxes and rabbits to the main lists.
         actors.addAll(newActors);
 
-        VIEW.showStatus(step, FIELD);
+        notifyObservers(step, field);
     }
 
     /**
@@ -111,28 +116,24 @@ public class Simulator {
     public void reset() {
         step = 0;
         actors.clear();
-        Location hunterLoc = new Location(RANDOM.nextInt(FIELD.getDepth()), RANDOM.nextInt(FIELD.getWidth()));
-        Actor hunter = ActorFactory.createActor(ActorType.HUNTER, false, FIELD, hunterLoc);
-        actors.add(hunter);
         populate();
 
         // Show the starting state in the view.
-        VIEW.showStatus(step, FIELD);
+        view.showStatus(step, field);
     }
 
     /**
      * Randomly populate the field with foxes and rabbits.
      */
     private void populate() {
-        
-        FIELD.clear();
-        for (int row = 0; row < FIELD.getDepth(); row++) {
-            for (int col = 0; col < FIELD.getWidth(); col++) {
+
+        field.clear();
+        for (int row = 0; row < field.getDepth(); row++) {
+            for (int col = 0; col < field.getWidth(); col++) {
                 for (ActorType actorType : ActorType.values()) {
-                    if (actorType.equals(ActorType.HUNTER)) { continue; }
                     if (RANDOM.nextDouble() <= actorType.getCreationProbability()) {
                         Location location = new Location(row, col);
-                        Actor animal = ActorFactory.createActor(actorType, true, FIELD, location);
+                        Actor animal = ActorFactory.createActor(actorType, true, field, location);
                         actors.add(animal);
                         break;
                     }

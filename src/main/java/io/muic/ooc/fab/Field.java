@@ -11,9 +11,10 @@ public class Field {
     private static final Random RANDOM = new Random();
 
     // The depth and width of the field.
-    private int depth, width;
+    private final int depth;
+    private final int width;
     // Storage for the animals.
-    private Object[][] field;
+    private final Object[][] field;
 
     /**
      * Represent a field of the given dimensions.
@@ -52,8 +53,8 @@ public class Field {
      * the location it will be lost.
      *
      * @param actor The actor to be placed.
-     * @param row Row coordinate of the location.
-     * @param col Column coordinate of the location.
+     * @param row   Row coordinate of the location.
+     * @param col   Column coordinate of the location.
      */
     public void place(Object actor, int row, int col) {
         place(actor, new Location(row, col));
@@ -63,7 +64,7 @@ public class Field {
      * Place an actor at the given location. If there is already an actor at
      * the location it will be lost.
      *
-     * @param actor The actor to be placed.
+     * @param actor    The actor to be placed.
      * @param location Where to place the actor.
      */
     public void place(Object actor, Location location) {

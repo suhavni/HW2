@@ -4,19 +4,12 @@ package io.muic.ooc.fab.view;
 import io.muic.ooc.fab.Field;
 import io.muic.ooc.fab.FieldStats;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class SimulatorView extends JFrame {
 
@@ -28,13 +21,14 @@ public class SimulatorView extends JFrame {
 
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel, population;
-    private FieldView fieldView;
+    private final JLabel stepLabel;
+    private final JLabel population;
+    private final FieldView fieldView;
 
     // A map for storing colors for participants in the simulation
-    private Map<Class, Color> colors;
+    private final Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
-    private FieldStats stats;
+    private final FieldStats stats;
 
     /**
      * Create a view of the given width and height.
@@ -168,10 +162,10 @@ public class SimulatorView extends JFrame {
     private class FieldView extends JPanel {
 
         private final int GRID_VIEW_SCALING_FACTOR = 6;
-
-        private int gridWidth, gridHeight;
-        private int xScale, yScale;
         Dimension size;
+        private final int gridWidth;
+        private final int gridHeight;
+        private int xScale, yScale;
         private Graphics g;
         private Image fieldImage;
 
