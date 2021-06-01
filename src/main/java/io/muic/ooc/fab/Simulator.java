@@ -20,13 +20,13 @@ public class Simulator extends Observable {
     // Random generator
     private static final Random RANDOM = new Random();
     // Lists of animals in the field.
-    private final List<Actor> actors;
+    private List<Actor> actors;
     // The current state of the field.
-    private final Field field;
+    private Field field;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
-    private final SimulatorView view;
+    private SimulatorView view;
 
     /**
      * Construct a simulation field with default size.

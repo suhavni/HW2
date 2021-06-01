@@ -163,8 +163,8 @@ public class SimulatorView extends JFrame {
 
         private final int GRID_VIEW_SCALING_FACTOR = 6;
         Dimension size;
-        private final int gridWidth;
-        private final int gridHeight;
+        private int gridWidth;
+        private int gridHeight;
         private int xScale, yScale;
         private Graphics g;
         private Image fieldImage;
